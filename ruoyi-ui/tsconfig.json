@@ -18,7 +18,15 @@
         },
         "skipLibCheck": true
     },
-    "include": ["src/**/*.ts", "src/**/*.d.ts", "src/**/*.tsx", "src/**/*.vue","test.ts"],
+    "include": [
+        "src/**/*.ts",
+        "src/**/*.d.ts",
+        "src/**/*.tsx",
+        "src/**/*.vue",
+        "test.ts",
+        "src/auto-imports.d.ts",
+        "vite/types/global.d.ts"
+    ],
     "references": [{ "path": "./tsconfig.node.json" }],
     "ts-node": {
         "compilerOptions": {

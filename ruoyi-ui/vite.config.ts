@@ -1,6 +1,6 @@
 import { defineConfig, loadEnv } from 'vite';
 import createVitePlugins from './vite/plugins';
-import Components from 'unplugin-vue-components/vite'
+
 import path from 'path';
 
 export default defineConfig(({ mode, command }) => {
@@ -44,5 +44,9 @@ export default defineConfig(({ mode, command }) => {
                 },
             },
         },
+        define: {
+            // 消除 hydration mismatch 提示
+            __VUE_PROD_HYDRATION_MISMATCH_DETAILS__: 'false'
+        }
     };
 });

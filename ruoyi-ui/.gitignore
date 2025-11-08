@@ -17,4 +17,4 @@ tests/**/coverage/
 *.sln
 yarn*
 components.d.ts
-auto-imports.d.ts
+src/auto-imports.d.ts

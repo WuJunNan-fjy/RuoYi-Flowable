@@ -1,87 +1,147 @@
 <template>
-    <ContentWrap>
-        <el-form :model="form" label-width="auto" style="max-width: 600px">
-            <el-form-item label="Activity name">
-                <el-input v-model="form.name" />
-            </el-form-item>
-            <el-form-item label="Activity zone">
-                <el-select v-model="form.region" placeholder="please select your zone">
-                    <el-option label="Zone one" value="shanghai" />
-                    <el-option label="Zone two" value="beijing" />
-                </el-select>
-            </el-form-item>
-            <el-form-item label="Activity time">
-                <el-col :span="11">
-                    <el-date-picker
-                        v-model="form.date1"
-                        type="date"
-                        placeholder="Pick a date"
-                        style="width: 100%"
+    <div>
+        <!-- 搜索工作栏 -->
+        <ContentWrap>
+            <el-form
+                class="-mb-15px"
+                :model="queryParams"
+                ref="queryFormRef"
+                :inline="true"
+                label-width="68px"
+            >
+                <el-form-item label="流程标识" prop="key">
+                    <el-input
+                        v-model="queryParams.key"
+                        placeholder="请输入流程标识"
+                        clearable
+                        @keyup.enter="handleQuery"
+                        class="!w-240px"
                     />
-                </el-col>
-                <el-col :span="2" class="text-center">
-                    <span class="text-gray-500">-</span>
-                </el-col>
-                <el-col :span="11">
-                    <el-time-picker
-                        v-model="form.date2"
-                        placeholder="Pick a time"
-                        style="width: 100%"
+                </el-form-item>
+
+                <el-form-item label="流程名称" prop="name">
+                    <el-input
+                        v-model="queryParams.name"
+                        placeholder="请输入流程名称"
+                        clearable
+                        @keyup.enter="handleQuery"
+                        class="!w-240px"
                     />
-                </el-col>
-            </el-form-item>
-            <el-form-item label="Instant delivery">
-                <el-switch v-model="form.delivery" />
-            </el-form-item>
-            <el-form-item label="Activity type">
-                <el-checkbox-group v-model="form.type">
-                    <el-checkbox value="Online activities" name="type">
-                        Online activities
-                    </el-checkbox>
-                    <el-checkbox value="Promotion activities" name="type">
-                        Promotion activities
-                    </el-checkbox>
-                    <el-checkbox value="Offline activities" name="type">
-                        Offline activities
-                    </el-checkbox>
-                    <el-checkbox value="Simple brand exposure" name="type">
-                        Simple brand exposure
-                    </el-checkbox>
-                </el-checkbox-group>
-            </el-form-item>
-            <el-form-item label="Resources">
-                <el-radio-group v-model="form.resource">
-                    <el-radio value="Sponsor">Sponsor</el-radio>
-                    <el-radio value="Venue">Venue</el-radio>
-                </el-radio-group>
-            </el-form-item>
-            <el-form-item label="Activity form">
-                <el-input v-model="form.desc" type="textarea" />
-            </el-form-item>
-            <el-form-item>
-                <el-button type="primary" @click="onSubmit">Create</el-button>
-                <el-button>Cancel</el-button>
-            </el-form-item>
-        </el-form>
-    </ContentWrap>
+                </el-form-item>
+
+                <el-form-item label="流程分类" prop="category">
+                    <el-select
+                        v-model="queryParams.category"
+                        placeholder="请选择流程分类"
+                        clearable
+                        class="!w-240px"
+                    >
+                        <el-option
+                            v-for="category in categoryList"
+                            :key="category.code"
+                            :label="category.name"
+                            :value="category.code"
+                        />
+                    </el-select>
+                </el-form-item>
+
+                <el-form-item>
+                    <el-button @click="handleQuery">
+                        <Icon icon="ep:search" class="mr-5px"/>
+                        搜索
+                    </el-button>
+                    <el-button @click="resetQuery">
+                        <Icon icon="ep:refresh" class="mr-5px"/>
+                        重置
+                    </el-button>
+                    <el-button
+                        type="primary"
+                        plain
+                        @click="openForm('create')"
+                        v-hasPermi="['bpm:model:create']"
+                    >
+                        <Icon icon="ep:plus" class="mr-5px"/>
+                        新建
+                    </el-button>
+                </el-form-item>
+            </el-form>
+        </ContentWrap>
+
+        <!-- 列表 -->
+        <ContentWrap>
+            <el-table :data="tableData" style="width: 100%">
+                <el-table-column fixed prop="date" label="Date" width="150"/>
+                <el-table-column prop="key" label="流程标识" width="120"/>
+                <el-table-column prop="category" label="流程分类" width="120"/>
+                <el-table-column prop="name" label="流程名称" width="120"/>
+                <el-table-column fixed="right" label="操作" min-width="120">
+                    <template #default>
+                        <el-button link type="primary" size="small" @click="handleClick">
+                            删除
+                        </el-button>
+                        <el-button link type="primary" size="small">修改</el-button>
+                    </template>
+                </el-table-column>
+            </el-table>
+        </ContentWrap>
+    </div>
 </template>
 
 <script lang="ts" setup name="FlwModel">
-import { reactive } from 'vue'
+import type {FlwModelQuery, FlwModelTableItem} from '@/types'
 
-// do not use same name with ref
-const form = reactive({
+/* ----------------------------------------------------------------
+ *  搜索表单 & 表格数据
+ * --------------------------------------------------------------*/
+const queryFormRef = ref()
+const categoryList = ref<any[]>([])               // 流程分类下拉
+const tableData = ref<FlwModelTableItem[]>([])   // 表格数据
+
+const queryParams = reactive<FlwModelQuery>({
+    pageNo: 1,
+    pageSize: 10,
+    key: '',
     name: '',
-    region: '',
-    date1: '',
-    date2: '',
-    delivery: false,
-    type: [],
-    resource: '',
-    desc: '',
+    category: ''
 })
 
-const onSubmit = () => {
-    console.log('submit!')
+/* ----------------------------------------------------------------
+ *  核心方法
+ * --------------------------------------------------------------*/
+const handleQuery = () => {
+    loadData()
 }
+
+const resetQuery = () => {
+    Object.assign(queryParams, {key: '', name: '', category: ''})
+    handleQuery()
+}
+
+const loadData = async () => {
+    try {
+        // const { list } = await ModelApi.getModelPage(toRaw(queryParams))
+        // tableData.value = list
+    } catch (e) {
+        console.error(e)
+    }
+}
+
+const handleClick = () => {
+    console.log('handleClick')
+}
+
+const openForm = (type: 'create' | 'update', id?: number) => {
+    /* 弹窗逻辑待实现 */
+    console.log(type, id)
+}
+
+/* ----------------------------------------------------------------
+ *  初始化
+ * --------------------------------------------------------------*/
+onMounted(async () => {
+    // 1. 取流程分类下拉数据
+    // categoryList.value = await CategoryApi.getCategorySimpleList()
+    // 2. 拉列表
+    await loadData()
+})
 </script>
