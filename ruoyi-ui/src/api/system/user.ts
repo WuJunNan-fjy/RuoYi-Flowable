@@ -45,7 +45,7 @@ export function delUser(userId: any) {
 }
 
 // 用户密码重置
-export function resetUserPwd(userId, password) {
+export function resetUserPwd({ userId, password }:  { password: string; userId: string | number }) {
     const data = {
         userId,
         password,
@@ -58,7 +58,7 @@ export function resetUserPwd(userId, password) {
 }
 
 // 用户状态修改
-export function changeUserStatus(userId, status) {
+export function changeUserStatus({ userId, status }:  { userId: string | number; status: string }) {
     const data = {
         userId,
         status,
@@ -79,7 +79,7 @@ export function getUserProfile() {
 }
 
 // 修改用户个人信息
-export function updateUserProfile(data) {
+export function updateUserProfile(data: object) {
     return request({
         url: '/system/user/profile',
         method: 'put',
@@ -88,7 +88,7 @@ export function updateUserProfile(data) {
 }
 
 // 用户密码重置
-export function updateUserPwd(oldPassword, newPassword) {
+export function updateUserPwd({oldPassword, newPassword} : { oldPassword: string; newPassword: string; }) {
     const data = {
         oldPassword,
         newPassword,
@@ -101,7 +101,7 @@ export function updateUserPwd(oldPassword, newPassword) {
 }
 
 // 用户头像上传
-export function uploadAvatar(data) {
+export function uploadAvatar(data: object) {
     return request({
         url: '/system/user/profile/avatar',
         method: 'post',
@@ -110,7 +110,7 @@ export function uploadAvatar(data) {
 }
 
 // 查询授权角色
-export function getAuthRole(userId) {
+export function getAuthRole(userId: string | number) {
     return request({
         url: '/system/user/authRole/' + userId,
         method: 'get',
@@ -118,7 +118,7 @@ export function getAuthRole(userId) {
 }
 
 // 保存授权角色
-export function updateAuthRole(data) {
+export function updateAuthRole(data: object) {
     return request({
         url: '/system/user/authRole',
         method: 'put',

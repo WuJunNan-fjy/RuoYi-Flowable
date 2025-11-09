@@ -3,7 +3,7 @@
         <!-- 搜索工作栏 -->
         <ContentWrap>
             <el-form
-                class="-mb-15px"
+                class="compact-form"
                 :model="queryParams"
                 ref="queryFormRef"
                 :inline="true"
@@ -15,7 +15,7 @@
                         placeholder="请输入流程标识"
                         clearable
                         @keyup.enter="handleQuery"
-                        class="!w-240px"
+                        style="width: 240px"
                     />
                 </el-form-item>
 
@@ -25,7 +25,7 @@
                         placeholder="请输入流程名称"
                         clearable
                         @keyup.enter="handleQuery"
-                        class="!w-240px"
+                        style="width: 240px"
                     />
                 </el-form-item>
 
@@ -34,7 +34,7 @@
                         v-model="queryParams.category"
                         placeholder="请选择流程分类"
                         clearable
-                        class="!w-240px"
+                        style="width: 240px"
                     >
                         <el-option
                             v-for="category in categoryList"
@@ -61,7 +61,7 @@
                         v-hasPermi="['bpm:model:create']"
                     >
                         <Icon icon="ep:plus" class="mr-5px"/>
-                        新建
+                        新增流程
                     </el-button>
                 </el-form-item>
             </el-form>
@@ -70,11 +70,10 @@
         <!-- 列表 -->
         <ContentWrap>
             <el-table :data="tableData" style="width: 100%">
-                <el-table-column fixed prop="date" label="Date" width="150"/>
-                <el-table-column prop="key" label="流程标识" width="120"/>
-                <el-table-column prop="category" label="流程分类" width="120"/>
-                <el-table-column prop="name" label="流程名称" width="120"/>
-                <el-table-column fixed="right" label="操作" min-width="120">
+                <el-table-column prop="key" label="流程标识" />
+                <el-table-column prop="category" label="流程分类" />
+                <el-table-column prop="name" label="流程名称" />
+                <el-table-column fixed="right" label="操作" >
                     <template #default>
                         <el-button link type="primary" size="small" @click="handleClick">
                             删除
@@ -83,11 +82,22 @@
                     </template>
                 </el-table-column>
             </el-table>
+            <!-- 分页 -->
+            <Pagination
+                :total="total"
+                v-model:page="queryParams.pageNo"
+                v-model:limit="queryParams.pageSize"
+                @pagination="loadData"
+            />
         </ContentWrap>
+
+        <!-- 表单弹窗：添加/修改流程 -->
+        <ModelForm ref="formRef" @success="loadData" />
     </div>
 </template>
 
 <script lang="ts" setup name="FlwModel">
+import ModelForm from './ModelForm.vue'
 import type {FlwModelQuery, FlwModelTableItem} from '@/types'
 
 /* ----------------------------------------------------------------
@@ -96,6 +106,8 @@ import type {FlwModelQuery, FlwModelTableItem} from '@/types'
 const queryFormRef = ref()
 const categoryList = ref<any[]>([])               // 流程分类下拉
 const tableData = ref<FlwModelTableItem[]>([])   // 表格数据
+const total = ref(0)
+
 
 const queryParams = reactive<FlwModelQuery>({
     pageNo: 1,
@@ -105,9 +117,6 @@ const queryParams = reactive<FlwModelQuery>({
     category: ''
 })
 
-/* ----------------------------------------------------------------
- *  核心方法
- * --------------------------------------------------------------*/
 const handleQuery = () => {
     loadData()
 }
@@ -130,14 +139,13 @@ const handleClick = () => {
     console.log('handleClick')
 }
 
-const openForm = (type: 'create' | 'update', id?: number) => {
+const formRef = ref()
+const openForm = (type: 'create' | 'update', id?: string) => {
     /* 弹窗逻辑待实现 */
     console.log(type, id)
+    formRef.value.open(type, id)
 }
 
-/* ----------------------------------------------------------------
- *  初始化
- * --------------------------------------------------------------*/
 onMounted(async () => {
     // 1. 取流程分类下拉数据
     // categoryList.value = await CategoryApi.getCategorySimpleList()
@@ -145,3 +153,8 @@ onMounted(async () => {
     await loadData()
 })
 </script>
+<style scoped>
+.compact-form {
+    margin-bottom: -15px;
+}
+</style>

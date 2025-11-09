@@ -1,4 +1,4 @@
-import { createApp } from 'vue';
+import {createApp} from 'vue';
 
 import Cookies from 'js-cookie';
 
@@ -6,6 +6,7 @@ import ElementPlus from 'element-plus';
 import locale from 'element-plus/lib/locale/lang/zh-cn'; // 中文语言
 
 import '@/assets/styles/index.scss'; // global css
+import '@/styles/index.scss';
 // element css
 import 'element-plus/es/components/message/style/css';
 import 'element-plus/es/components/message-box/style/css';
@@ -21,16 +22,17 @@ import directive from './directive'; // directive
 
 // 注册指令
 import plugins from './plugins'; // plugins
-import { download } from '@/utils/request';
+import {download} from '@/utils/request';
 
 // svg图标
 import 'virtual:svg-icons-register';
 import SvgIcon from '@/components/SvgIcon/index.vue';
 import elementIcons from '@/components/SvgIcon/svgicon';
+import {setupI18n} from '@/plugins/vueI18n'
 
 import './permission'; // permission control
 
-import { useDict } from '@/utils/dict';
+import {useDict} from '@/utils/dict';
 import {
     parseTime,
     resetForm,
@@ -87,11 +89,13 @@ app.component('svg-icon', SvgIcon);
 
 directive(app);
 
-// 使用element-plus 并且设置全局的大小
-app.use(ElementPlus, {
-    locale: locale,
-    // 支持 large、default、small
-    size: Cookies.get('size') || 'default',
-});
-
-app.mount('#app');
+(async () => {
+    await setupI18n(app)
+    // 使用element-plus 并且设置全局的大小
+    app.use(ElementPlus, {
+        locale: locale,
+        // 支持 large、default、small
+        size: Cookies.get('size') || 'default',
+    });
+    app.mount('#app');
+})();

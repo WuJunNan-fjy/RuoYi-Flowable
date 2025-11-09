@@ -5,9 +5,10 @@ export default function createAutoImport() {
         dts: 'src/auto-imports.d.ts',
         imports: [
             'vue',           // ← 必须写
-            'vue-router',    // 按需
-            'pinia',         // 按需
-            '@vueuse/core'   // 按需
+            'vue-router',
+            'pinia',
+            '@vueuse/core',
+            { '@/hooks/web/useI18n': ['useI18n'] } // 自动引入自定义 useI18n
         ],
         resolvers: [ElementPlusResolver()],
     });

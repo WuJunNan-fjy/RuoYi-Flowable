@@ -605,7 +605,7 @@ function handleStatusChange(row: any) {
     proxy!.$modal
         .confirm('确认要"' + text + '""' + row.userName + '"用户吗?')
         .then(function () {
-            return changeUserStatus(row.userId, row.status);
+            return changeUserStatus({ userId: row.userId, status: row.status });
         })
         .then(() => {
             proxy!.$modal.msgSuccess(text + '成功');
@@ -643,7 +643,7 @@ function handleResetPwd(row: any) {
             inputErrorMessage: '用户密码长度必须介于 5 和 20 之间',
         })
         .then(({ value }: any) => {
-            resetUserPwd(row.userId, value).then(response => {
+            resetUserPwd({ userId: row.userId, password: value }).then(response => {
                 proxy!.$modal.msgSuccess('修改成功，新密码是：' + value);
             });
         })
