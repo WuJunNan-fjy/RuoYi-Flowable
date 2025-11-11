@@ -185,4 +185,9 @@ export function download(url: string, params: any, filename: string, config: any
         });
 }
 
-export default service;
+const request: any = (config: any) => service(config);
+request.get = ({ url, params, ...rest }: any) => service.get(url, { params, ...rest });
+request.post = ({ url, data, ...rest }: any) => service.post(url, data, { ...rest });
+request.put = ({ url, data, ...rest }: any) => service.put(url, data, { ...rest });
+request.delete = ({ url, params, ...rest }: any) => service.delete(url, { params, ...rest });
+export default request;

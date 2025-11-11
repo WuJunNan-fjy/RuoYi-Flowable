@@ -35,6 +35,11 @@
         <logback.version>1.2.13</logback.version>
         <spring-security.version>5.7.12</spring-security.version>
         <spring-framework.version>5.3.39</spring-framework.version>
+        <lombok.version>1.18.34</lombok.version>
+        <springdoc.version>1.7.0</springdoc.version>
+        <!-- flowable 工作流相关 -->
+        <flowable.version>6.8.0</flowable.version>
+        <ruoyi.flowable.version>1.0.0</ruoyi.flowable.version>
     </properties>
 
     <!-- 依赖声明 -->
@@ -183,6 +188,30 @@
                 <version>${kaptcha.version}</version>
             </dependency>
 
+            <dependency>
+                <groupId>org.projectlombok</groupId>
+                <artifactId>lombok</artifactId>
+                <version>${lombok.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>org.springdoc</groupId>
+                <artifactId>springdoc-openapi-ui</artifactId>
+                <version>${springdoc.version}</version>
+            </dependency>
+
+            <!-- 工作流相关 -->
+            <dependency>
+                <groupId>org.flowable</groupId>
+                <artifactId>flowable-spring-boot-starter-process</artifactId>
+                <version>${flowable.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.flowable</groupId>
+                <artifactId>flowable-spring-boot-starter-actuator</artifactId>
+                <version>${flowable.version}</version>
+            </dependency>
+
             <!-- 定时任务-->
             <dependency>
                 <groupId>com.ruoyi</groupId>
@@ -224,6 +253,12 @@
                 <version>${ruoyi.version}</version>
             </dependency>
 
+            <dependency>
+                <groupId>com.ruoyi</groupId>
+                <artifactId>ruoyi-flowable</artifactId>
+                <version>${ruoyi.flowable.version}</version>
+            </dependency>
+
         </dependencies>
     </dependencyManagement>
 
@@ -235,6 +270,8 @@
         <module>ruoyi-generator</module>
         <module>ruoyi-common</module>
         <module>ruoyi-aigen</module>
+        <module>ruoyi-module</module>
+        <module>ruoyi-test</module>
     </modules>
     <packaging>pom</packaging>
 
