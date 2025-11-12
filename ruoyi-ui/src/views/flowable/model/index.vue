@@ -98,19 +98,20 @@
 
 <script lang="ts" setup name="FlwModel">
 import ModelForm from './ModelForm.vue'
-import type {FlwModelQuery, FlwModelTableItem} from '@/types'
+import type {FlwModelQuery} from '@/types'
+import * as ModelApi from '@/api/flowable/model'
 
 /* ----------------------------------------------------------------
  *  搜索表单 & 表格数据
  * --------------------------------------------------------------*/
 const queryFormRef = ref()
 const categoryList = ref<any[]>([])               // 流程分类下拉
-const tableData = ref<FlwModelTableItem[]>([])   // 表格数据
+const tableData = ref([])   // 表格数据
 const total = ref(0)
 
 
 const queryParams = reactive<FlwModelQuery>({
-    pageNo: 1,
+    pageNum: 1,
     pageSize: 10,
     key: '',
     name: '',
@@ -128,8 +129,9 @@ const resetQuery = () => {
 
 const loadData = async () => {
     try {
-        // const { list } = await ModelApi.getModelPage(toRaw(queryParams))
-        // tableData.value = list
+        const { rows, total: totalCount } = await ModelApi.getModelList(toRaw(queryParams))
+        tableData.value = rows;
+        total.value = totalCount;
     } catch (e) {
         console.error(e)
     }

@@ -1,5 +1,4 @@
 /* ===== 流程相关（flowable） ===== */
 export type {
-    FlwModelQuery,
-    FlwModelTableItem
+    FlwModelQuery
 } from './flowable/model'

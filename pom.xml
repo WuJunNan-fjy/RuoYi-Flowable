@@ -40,6 +40,11 @@
         <!-- flowable 工作流相关 -->
         <flowable.version>6.8.0</flowable.version>
         <ruoyi.flowable.version>1.0.0</ruoyi.flowable.version>
+        <mapstruct.version>1.6.2</mapstruct.version>
+        <!-- DB 相关 -->
+        <mybatis.version>3.5.16</mybatis.version>
+        <mybatis-plus.version>3.5.7</mybatis-plus.version> <!-- MyBatis Plus 3.5.8 需要最低 JDK11 版本，无法升级 -->
+        <mybatis-plus-join.version>1.4.13</mybatis-plus-join.version>
     </properties>
 
     <!-- 依赖声明 -->
@@ -105,6 +110,22 @@
                 <version>${tomcat.version}</version>
             </dependency>
 
+            <!-- DB 相关 -->
+            <dependency>
+                <groupId>org.mybatis</groupId>
+                <artifactId>mybatis</artifactId>
+                <version>${mybatis.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.baomidou</groupId>
+                <artifactId>mybatis-plus-boot-starter</artifactId>
+                <version>${mybatis-plus.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.baomidou</groupId>
+                <artifactId>mybatis-plus-generator</artifactId> <!-- 代码生成器，使用它解析表结构 -->
+                <version>${mybatis-plus.version}</version>
+            </dependency>
             <!-- 阿里数据库连接池 -->
             <dependency>
                 <groupId>com.alibaba</groupId>
@@ -198,6 +219,23 @@
                 <groupId>org.springdoc</groupId>
                 <artifactId>springdoc-openapi-ui</artifactId>
                 <version>${springdoc.version}</version>
+            </dependency>
+
+            <!--对象转换-->
+            <dependency>
+                <groupId>org.mapstruct</groupId>
+                <artifactId>mapstruct</artifactId> <!-- use mapstruct-jdk8 for Java 8 or higher -->
+                <version>${mapstruct.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.mapstruct</groupId>
+                <artifactId>mapstruct-jdk8</artifactId>
+                <version>${mapstruct.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.mapstruct</groupId>
+                <artifactId>mapstruct-processor</artifactId>
+                <version>${mapstruct.version}</version>
             </dependency>
 
             <!-- 工作流相关 -->

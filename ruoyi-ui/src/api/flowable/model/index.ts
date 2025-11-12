@@ -1,17 +1,18 @@
 import request from '@/utils/request';
-
-export type ProcessDefinitionVO = {
-    id: string
-    version: number
-    deploymentTIme: string
-    suspensionState: number
-    formType?: number
-}
+import { FlwModelQuery } from '@/types/flowable/model';
 
 export type ModelVO = {
     id: number
     key: string
     name: string
+}
+
+/**
+ * 获取流程模型列表
+ * @param params
+ */
+export const getModelList = async (params: FlwModelQuery) => {
+    return await request.get({ url: '/flowable/model/queryModelList', params })
 }
 
 /**
@@ -21,3 +22,4 @@ export type ModelVO = {
 export const createModel = async (data: ModelVO) => {
     return await request.post({ url: '/flowable/model/create', data })
 }
+

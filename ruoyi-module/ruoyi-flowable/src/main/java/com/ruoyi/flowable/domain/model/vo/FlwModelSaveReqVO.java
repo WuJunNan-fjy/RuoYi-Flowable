@@ -1,4 +1,4 @@
-package com.ruoyi.flowable.domain.vo;
+package com.ruoyi.flowable.domain.model.vo;
 
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Data;
@@ -18,7 +18,4 @@ public class FlwModelSaveReqVO {
 
     @Schema(description = "流程名称", requiredMode = Schema.RequiredMode.REQUIRED, example = "流程名称")
     private String name;
-
-    @Schema(description = "流程描述", requiredMode = Schema.RequiredMode.REQUIRED, example = "流程描述")
-    private String description;
 }
