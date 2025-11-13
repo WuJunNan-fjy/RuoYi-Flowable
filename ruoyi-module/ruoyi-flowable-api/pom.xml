@@ -5,22 +5,26 @@
     <modelVersion>4.0.0</modelVersion>
     <parent>
         <groupId>com.ruoyi</groupId>
-        <artifactId>ruoyi</artifactId>
-        <version>3.8.9</version>
+        <artifactId>ruoyi-module</artifactId>
+        <version>1.0.0</version>
     </parent>
 
-    <artifactId>ruoyi-module</artifactId>
+    <artifactId>ruoyi-flowable-api</artifactId>
     <version>1.0.0</version>
-    <packaging>pom</packaging>
-    <modules>
-        <module>ruoyi-flowable-api</module>
-        <module>ruoyi-flowable</module>
-    </modules>
+    <packaging>jar</packaging>
 
     <properties>
         <maven.compiler.source>8</maven.compiler.source>
         <maven.compiler.target>8</maven.compiler.target>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     </properties>
+
+    <dependencies>
+        <dependency>
+            <groupId>org.projectlombok</groupId>
+            <artifactId>lombok</artifactId>
+            <scope>provided</scope>
+        </dependency>
+    </dependencies>
 
 </project>

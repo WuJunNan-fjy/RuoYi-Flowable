@@ -20,7 +20,7 @@ public class FlowableTest {
     @Test
     public void test() {
         ProcessEngineConfiguration configuration = new StandaloneProcessEngineConfiguration()
-                .setJdbcUrl("jdbc:mysql://localhost:3306/ruoyi?serverTimezone=UTC&nullCatalogMeansCurrent=true&characterEncoding=UTF-8")
+                .setJdbcUrl("jdbc:mysql://localhost:3307/ruoyi?serverTimezone=UTC&nullCatalogMeansCurrent=true&characterEncoding=UTF-8")
                 .setJdbcDriver("com.mysql.cj.jdbc.Driver")
                 .setJdbcUsername("root")
                 .setJdbcPassword("1234")

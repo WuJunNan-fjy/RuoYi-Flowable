@@ -21,6 +21,11 @@
     <dependencies>
         <dependency>
             <groupId>com.ruoyi</groupId>
+            <artifactId>ruoyi-flowable-api</artifactId>
+            <version>1.0.0</version>
+        </dependency>
+        <dependency>
+            <groupId>com.ruoyi</groupId>
             <artifactId>ruoyi-framework</artifactId>
         </dependency>
         <dependency>
@@ -40,6 +45,12 @@
         <dependency>
             <groupId>org.flowable</groupId>
             <artifactId>flowable-spring-boot-starter-actuator</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>com.ruoyi</groupId>
+            <artifactId>ruoyi-flowable-api</artifactId>
+            <version>1.0.0</version>
         </dependency>
     </dependencies>
 

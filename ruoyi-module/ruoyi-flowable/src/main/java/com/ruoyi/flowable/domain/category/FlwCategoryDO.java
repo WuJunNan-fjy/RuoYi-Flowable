@@ -1,4 +1,4 @@
-package com.ruoyi.flw.domain.category.dto;
+package com.ruoyi.flowable.domain.category;
 
 import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
