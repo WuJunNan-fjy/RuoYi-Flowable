@@ -1,6 +1,6 @@
 package com.ruoyi.flowable.mapper;
 
-import com.baomidou.mybatisplus.core.mapper.BaseMapper;
+import com.mybatisflex.core.BaseMapper;
 import com.ruoyi.flowable.domain.category.FlwCategoryDO;
 import org.apache.ibatis.annotations.Mapper;
 

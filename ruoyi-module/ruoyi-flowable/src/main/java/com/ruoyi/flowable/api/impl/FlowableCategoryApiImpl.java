@@ -1,6 +1,6 @@
 package com.ruoyi.flowable.api.impl;
 
-import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
+import com.mybatisflex.core.query.QueryWrapper;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import com.ruoyi.flowable.api.common.PageResult;
@@ -28,14 +28,15 @@ public class FlowableCategoryApiImpl implements FlowableCategoryApi {
         if (req.getPageNum() != null && req.getPageSize() != null && req.getPageNum() > 0 && req.getPageSize() > 0) {
             PageHelper.startPage(req.getPageNum(), req.getPageSize());
         }
-        QueryWrapper<FlwCategoryDO> qw = new QueryWrapper<>();
+        QueryWrapper qw = new QueryWrapper();
+        qw.from("flw_category");
         if (req.getCode() != null && !req.getCode().isEmpty()) {
             qw.eq("code", req.getCode());
         }
         if (req.getName() != null && !req.getName().isEmpty()) {
             qw.like("name", req.getName());
         }
-        List<FlwCategoryDO> list = flwCategoryMapper.selectList(qw);
+        List<FlwCategoryDO> list = flwCategoryMapper.selectListByQuery(qw);
         PageInfo<FlwCategoryDO> pageInfo = new PageInfo<>(list);
         List<FlwCategoryDTO> dtoList = pageInfo.getList().stream().map(this::toDto).collect(Collectors.toList());
         return new PageResult<>(dtoList, pageInfo.getTotal());
@@ -60,7 +61,7 @@ public class FlowableCategoryApiImpl implements FlowableCategoryApi {
         entity.setName(req.getName());
         entity.setSort(req.getSort());
         entity.setStatus(req.getStatus());
-        flwCategoryMapper.updateById(entity);
+        flwCategoryMapper.update(entity);
     }
 
     @Override

@@ -43,8 +43,8 @@
         <mapstruct.version>1.6.2</mapstruct.version>
         <!-- DB 相关 -->
         <mybatis.version>3.5.16</mybatis.version>
-        <mybatis-plus.version>3.5.7</mybatis-plus.version> <!-- MyBatis Plus 3.5.8 需要最低 JDK11 版本，无法升级 -->
-        <mybatis-plus-join.version>1.4.13</mybatis-plus-join.version>
+        <mybatis-flex.version>1.11.4</mybatis-flex.version>
+        <mybatis-spring-boot.version>2.2.2</mybatis-spring-boot.version>
     </properties>
 
     <!-- 依赖声明 -->
@@ -112,19 +112,9 @@
 
             <!-- DB 相关 -->
             <dependency>
-                <groupId>org.mybatis</groupId>
-                <artifactId>mybatis</artifactId>
-                <version>${mybatis.version}</version>
-            </dependency>
-            <dependency>
-                <groupId>com.baomidou</groupId>
-                <artifactId>mybatis-plus-boot-starter</artifactId>
-                <version>${mybatis-plus.version}</version>
-            </dependency>
-            <dependency>
-                <groupId>com.baomidou</groupId>
-                <artifactId>mybatis-plus-generator</artifactId> <!-- 代码生成器，使用它解析表结构 -->
-                <version>${mybatis-plus.version}</version>
+                <groupId>com.mybatis-flex</groupId>
+                <artifactId>mybatis-flex-core</artifactId>
+                <version>${mybatis-flex.version}</version>
             </dependency>
             <!-- 阿里数据库连接池 -->
             <dependency>
@@ -297,6 +287,12 @@
                 <version>${ruoyi.flowable.version}</version>
             </dependency>
 
+            <dependency>
+                <groupId>com.ruoyi</groupId>
+                <artifactId>mybatis-flex-spring-boot-starter</artifactId>
+                <version>${ruoyi.version}</version>
+            </dependency>
+
         </dependencies>
     </dependencyManagement>
 
@@ -309,6 +305,7 @@
         <module>ruoyi-common</module>
         <module>ruoyi-aigen</module>
         <module>ruoyi-module</module>
+        <module>ruoyi-starters</module>
         <module>ruoyi-test</module>
     </modules>
     <packaging>pom</packaging>

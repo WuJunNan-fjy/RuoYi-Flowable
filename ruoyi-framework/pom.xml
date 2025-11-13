@@ -59,6 +59,13 @@
             <artifactId>ruoyi-system</artifactId>
         </dependency>
 
+        <!-- MyBatis-Flex Starter -->
+        <dependency>
+            <groupId>com.ruoyi</groupId>
+            <artifactId>mybatis-flex-spring-boot-starter</artifactId>
+            <version>${ruoyi.version}</version>
+        </dependency>
+
     </dependencies>
 
 </project>
