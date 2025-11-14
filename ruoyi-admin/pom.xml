@@ -72,6 +72,12 @@
             <groupId>com.ruoyi</groupId>
             <artifactId>ruoyi-flowable</artifactId>
         </dependency>
+        <!-- 显式依赖 flowable API，确保类加载与热部署兼容 -->
+        <dependency>
+            <groupId>com.ruoyi</groupId>
+            <artifactId>ruoyi-flowable-api</artifactId>
+            <version>1.0.0</version>
+        </dependency>
 
     </dependencies>
 

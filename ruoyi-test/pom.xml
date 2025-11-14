@@ -19,9 +19,8 @@
 
     <dependencies>
         <dependency>
-            <groupId>junit</groupId>
-            <artifactId>junit</artifactId>
-            <version>4.13.2</version>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-test</artifactId>
             <scope>test</scope>
         </dependency>
 <!--        <dependency>-->
@@ -38,6 +37,16 @@
             <groupId>com.ruoyi</groupId>
             <artifactId>ruoyi-common</artifactId>
         </dependency>
+        <dependency>
+            <groupId>com.ruoyi</groupId>
+            <artifactId>ruoyi-admin</artifactId>
+            <version>${ruoyi.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>com.ruoyi</groupId>
+            <artifactId>ruoyi-flowable</artifactId>
+            <version>1.0.0</version>
+        </dependency>
         <!-- 工作流相关 -->
         <dependency>
             <groupId>org.flowable</groupId>
@@ -46,6 +55,12 @@
         <dependency>
             <groupId>org.flowable</groupId>
             <artifactId>flowable-spring-boot-starter-actuator</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.ruoyi</groupId>
+            <artifactId>ruoyi-flowable-api</artifactId>
+            <version>1.0.0</version>
+            <scope>test</scope>
         </dependency>
     </dependencies>
 </project>

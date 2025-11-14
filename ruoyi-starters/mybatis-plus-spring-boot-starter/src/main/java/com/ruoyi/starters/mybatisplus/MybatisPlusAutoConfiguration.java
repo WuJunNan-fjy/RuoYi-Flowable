@@ -25,7 +25,7 @@ import org.springframework.core.env.ConfigurableEnvironment;
 @AutoConfigureAfter(DataSourceAutoConfiguration.class)
 public class MybatisPlusAutoConfiguration {
 
-    
+
 
     @Bean
     @ConditionalOnMissingBean
