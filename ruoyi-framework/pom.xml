@@ -59,10 +59,10 @@
             <artifactId>ruoyi-system</artifactId>
         </dependency>
 
-        <!-- MyBatis-Flex Starter -->
+        <!-- MyBatis-plus Starter -->
         <dependency>
             <groupId>com.ruoyi</groupId>
-            <artifactId>mybatis-flex-spring-boot-starter</artifactId>
+            <artifactId>mybatis-plus-spring-boot-starter</artifactId>
             <version>${ruoyi.version}</version>
         </dependency>
 

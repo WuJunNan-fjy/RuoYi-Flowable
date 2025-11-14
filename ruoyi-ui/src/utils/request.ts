@@ -187,6 +187,14 @@ export function download(url: string, params: any, filename: string, config: any
 
 const request: any = (config: any) => service(config);
 request.get = ({ url, params, ...rest }: any) => service.get(url, { params, ...rest });
+/**
+ * 根据 id 获取详情
+ * @param url  资源基础路径，例如 '/api/user'
+ * @param id   主键值
+ * @param rest 其余 axios 配置（可选）
+ */
+request.detail = ({ url, id, ...rest }: { url: string; id: string | number; [k: string]: any }) =>
+    service.get(`${url}/${id}`, { ...rest });
 request.post = ({ url, data, ...rest }: any) => service.post(url, data, { ...rest });
 request.put = ({ url, data, ...rest }: any) => service.put(url, data, { ...rest });
 request.delete = ({ url, params, ...rest }: any) => service.delete(url, { params, ...rest });

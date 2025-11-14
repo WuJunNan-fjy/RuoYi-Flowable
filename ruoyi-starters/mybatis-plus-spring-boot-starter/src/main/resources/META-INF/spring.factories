@@ -1,0 +1,2 @@
+org.springframework.boot.autoconfigure.EnableAutoConfiguration=com.ruoyi.starters.mybatisplus.MybatisPlusAutoConfiguration
+org.springframework.boot.env.EnvironmentPostProcessor=com.ruoyi.starters.mybatisplus.config.IdTypeEnvironmentPostProcessor

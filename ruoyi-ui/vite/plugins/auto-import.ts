@@ -8,7 +8,9 @@ export default function createAutoImport() {
             'vue-router',
             'pinia',
             '@vueuse/core',
-            { '@/hooks/web/useI18n': ['useI18n'] } // 自动引入自定义 useI18n
+            { '@/hooks/web/useI18n': ['useI18n'] }, // 自动引入自定义 useI18n
+            { '@/utils/dict': ['useDict'] }, // 自动引入字典
+            { '@/hooks/web/useMessage': ['useMessage'] },
         ],
         resolvers: [ElementPlusResolver()],
     });

@@ -12,18 +12,9 @@
     <packaging>pom</packaging>
     <name>ruoyi-starters</name>
     <modules>
-        <module>mybatis-flex-spring-boot-starter</module>
+        <module>mybatis-plus-spring-boot-starter</module>
         <module>mq-starter</module>
         <module>es-starter</module>
     </modules>
-    <dependencyManagement>
-        <dependencies>
-            <dependency>
-                <groupId>com.mybatis-flex</groupId>
-                <artifactId>mybatis-flex-core</artifactId>
-                <version>${mybatis-flex.version}</version>
-            </dependency>
-        </dependencies>
-    </dependencyManagement>
-</project>
 
+</project>

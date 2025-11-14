@@ -1,8 +1,8 @@
 package com.ruoyi.flowable.domain.category;
 
-import com.mybatisflex.annotation.Id;
-import com.mybatisflex.annotation.KeyType;
-import com.mybatisflex.annotation.Table;
+import com.baomidou.mybatisplus.annotation.IdType;
+import com.baomidou.mybatisplus.annotation.TableId;
+import com.baomidou.mybatisplus.annotation.TableName;
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -18,7 +18,7 @@ import lombok.NoArgsConstructor;
  */
 @Data
 @Builder
-@Table("flw_category")
+@TableName(value = "flw_category")
 @NoArgsConstructor
 @AllArgsConstructor
 public class FlwCategoryDO extends BaseEntity
@@ -26,7 +26,7 @@ public class FlwCategoryDO extends BaseEntity
     private static final long serialVersionUID = 1L;
 
     /** 主键 */
-    @Id(keyType = KeyType.Auto)
+    @TableId(type = IdType.NONE)
     @Schema(description = "主键")
     private Long id;
 

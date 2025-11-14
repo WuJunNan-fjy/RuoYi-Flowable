@@ -12,6 +12,10 @@ ruoyi:
   addressEnabled: false
   # 验证码类型 math 数字计算 char 字符验证
   captchaType: math
+  #分布式自增ID
+  snowflake:
+    machineId: 1 #机器标识
+    datacenterId: 1 #数据中心
 
 # 开发环境配置
 server:
@@ -99,7 +103,23 @@ flowable:
   check-process-definitions: false # 设置为 false，禁用 /resources/processes 自动部署 BPMN XML 流程
   history-level: audit # full：保存历史数据的最高级别，可保存全部流程相关细节，包括流程流转各节点参数
   async-executor-activate: false # 关闭定时任务JOB
-
+# MyBatis Plus 的配置项
+mybatis-plus:
+  configuration:
+    map-underscore-to-camel-case: true # 虽然默认为 true ，但是还是显示去指定下。
+  global-config:
+    db-config:
+      id-type: NONE # “智能”模式，基于 IdTypeEnvironmentPostProcessor + 数据源的类型，自动适配成 AUTO、INPUT 模式。
+      #      id-type: AUTO # 自增 ID，适合 MySQL 等直接自增的数据库
+      #      id-type: INPUT # 用户输入 ID，适合 Oracle、PostgreSQL、Kingbase、DB2、H2 数据库
+      #      id-type: ASSIGN_ID # 分配 ID，默认使用雪花算法。注意，Oracle、PostgreSQL、Kingbase、DB2、H2 数据库时，需要去除实体类上的 @KeySequence 注解
+      logic-delete-value: 1 # 逻辑已删除值(默认为 1)
+      logic-not-delete-value: 0 # 逻辑未删除值(默认为 0)
+    banner: false # 关闭控制台的 Banner 打印
+  type-aliases-package: com.ruoyi.**.domain
+  mapper-base-packages: com.ruoyi.**.mapper
+  encryptor:
+    password: XDV71a+xqStEA3WH # 加解密的秘钥，可使用 https://www.imaegoo.com/2020/aes-key-generator/ 网站生成
 # token配置
 token:
   # 令牌自定义标识
