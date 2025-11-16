@@ -3,12 +3,15 @@ package com.ruoyi.flowable.domain.category;
 import com.baomidou.mybatisplus.annotation.IdType;
 import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
+import com.baomidou.mybatisplus.annotation.TableField;
+import com.ruoyi.starters.mybatisplus.base.BaseEntityX;
 import io.swagger.v3.oas.annotations.media.Schema;
+import liquibase.pro.packaged.S;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
-import com.ruoyi.common.core.domain.BaseEntity;
 import lombok.NoArgsConstructor;
+import java.util.Map;
 
 /**
  * @description: 流程分类对象 flw_category
@@ -21,12 +24,12 @@ import lombok.NoArgsConstructor;
 @TableName(value = "flw_category")
 @NoArgsConstructor
 @AllArgsConstructor
-public class FlwCategoryDO extends BaseEntity
+public class FlwCategoryDO extends BaseEntityX
 {
     private static final long serialVersionUID = 1L;
 
     /** 主键 */
-    @TableId(type = IdType.NONE)
+    @TableId(type = IdType.ASSIGN_ID)
     @Schema(description = "主键")
     private Long id;
 
@@ -45,4 +48,8 @@ public class FlwCategoryDO extends BaseEntity
     /** 状态 */
     @Schema(description = "状态")
     private Long status;
+
+    /** 分类备注 */
+    @Schema(description = "分类备注")
+    private String remark;
 }

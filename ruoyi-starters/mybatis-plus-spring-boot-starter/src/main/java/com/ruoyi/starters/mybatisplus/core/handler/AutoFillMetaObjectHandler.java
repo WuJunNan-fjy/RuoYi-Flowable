@@ -1,18 +1,19 @@
 package com.ruoyi.starters.mybatisplus.core.handler;
 
 import com.baomidou.mybatisplus.core.handlers.MetaObjectHandler;
-import com.ruoyi.common.core.domain.BaseEntity;
+import com.ruoyi.starters.mybatisplus.base.BaseEntityX;
 import com.ruoyi.common.utils.SecurityUtils;
 import org.apache.ibatis.reflection.MetaObject;
 
 import java.util.Date;
 import java.util.Objects;
 
-public class RuoYiMetaObjectHandler implements MetaObjectHandler {
+public class AutoFillMetaObjectHandler implements MetaObjectHandler {
+
     @Override
     public void insertFill(MetaObject metaObject) {
-        if (Objects.nonNull(metaObject) && metaObject.getOriginalObject() instanceof BaseEntity) {
-            BaseEntity base = (BaseEntity) metaObject.getOriginalObject();
+        if (Objects.nonNull(metaObject) && metaObject.getOriginalObject() instanceof BaseEntityX) {
+            BaseEntityX base = (BaseEntityX) metaObject.getOriginalObject();
             Date now = new Date();
             if (base.getCreateTime() == null) {
                 base.setCreateTime(now);
@@ -49,4 +50,3 @@ public class RuoYiMetaObjectHandler implements MetaObjectHandler {
         }
     }
 }
-

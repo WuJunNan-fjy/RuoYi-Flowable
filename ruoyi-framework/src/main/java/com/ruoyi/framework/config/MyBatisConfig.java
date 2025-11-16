@@ -11,6 +11,8 @@ import org.apache.ibatis.session.SqlSessionFactory;
 import com.baomidou.mybatisplus.extension.spring.MybatisSqlSessionFactoryBean;
 import org.apache.ibatis.plugin.Interceptor;
 import com.baomidou.mybatisplus.extension.plugins.MybatisPlusInterceptor;
+import com.baomidou.mybatisplus.core.config.GlobalConfig;
+import com.baomidou.mybatisplus.core.handlers.MetaObjectHandler;
 import org.mybatis.spring.boot.autoconfigure.SpringBootVFS;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
@@ -116,7 +118,7 @@ public class MyBatisConfig
     }
 
     @Bean
-    public SqlSessionFactory sqlSessionFactory(DataSource dataSource, MybatisPlusInterceptor mybatisPlusInterceptor) throws Exception
+    public SqlSessionFactory sqlSessionFactory(DataSource dataSource, MybatisPlusInterceptor mybatisPlusInterceptor, MetaObjectHandler metaObjectHandler) throws Exception
     {
         String typeAliasesPackage = env.getProperty("mybatis.typeAliasesPackage");
         String mapperLocations = env.getProperty("mybatis.mapperLocations");
@@ -130,6 +132,9 @@ public class MyBatisConfig
         sessionFactory.setMapperLocations(resolveMapperLocations(StringUtils.split(mapperLocations, ",")));
         sessionFactory.setConfigLocation(new DefaultResourceLoader().getResource(configLocation));
         sessionFactory.setPlugins(new Interceptor[]{mybatisPlusInterceptor});
+        GlobalConfig globalConfig = new GlobalConfig();
+        globalConfig.setMetaObjectHandler(metaObjectHandler);
+        sessionFactory.setGlobalConfig(globalConfig);
         return sessionFactory.getObject();
     }
 }

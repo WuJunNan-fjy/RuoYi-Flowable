@@ -20,7 +20,7 @@ public interface FlwCategoryConvert {
 
     default FlwCategoryDO toDO(FlwCategorySaveReq categoryCreateReq) {
         FlwCategoryDO entity = new FlwCategoryDO();
-        entity.setId(categoryCreateReq.getId() == null ? SnowFlake.getId() : categoryCreateReq.getId());
+        // entity.setId(categoryCreateReq.getId() == null ? SnowFlake.getId() : categoryCreateReq.getId());
         entity.setCode(categoryCreateReq.getCode());
         entity.setName(categoryCreateReq.getName());
         entity.setSort(categoryCreateReq.getSort());

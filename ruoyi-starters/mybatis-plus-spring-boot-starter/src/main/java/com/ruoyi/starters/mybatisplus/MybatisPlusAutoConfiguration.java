@@ -5,7 +5,7 @@ import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import com.baomidou.mybatisplus.extension.plugins.MybatisPlusInterceptor;
 import com.baomidou.mybatisplus.extension.plugins.inner.PaginationInnerInterceptor;
 import com.baomidou.mybatisplus.core.handlers.MetaObjectHandler;
-import com.ruoyi.starters.mybatisplus.core.handler.RuoYiMetaObjectHandler;
+import com.ruoyi.starters.mybatisplus.core.handler.AutoFillMetaObjectHandler;
 import com.baomidou.mybatisplus.core.incrementer.IKeyGenerator;
 import com.baomidou.mybatisplus.extension.incrementer.*;
 import org.mybatis.spring.mapper.MapperScannerConfigurer;
@@ -38,7 +38,7 @@ public class MybatisPlusAutoConfiguration {
     @Bean
     @ConditionalOnMissingBean
     public MetaObjectHandler metaObjectHandler() {
-        return new RuoYiMetaObjectHandler();
+        return new AutoFillMetaObjectHandler();
     }
 
     @Bean
